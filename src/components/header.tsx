@@ -2,6 +2,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 const navLinks = [
   {
     href: "/",
@@ -18,6 +20,9 @@ const navLinks = [
 ];
 export default function Header() {
   const pathName = usePathname();
+  const { isAuthenticated, getUser } = useKindeBrowserClient();
+
+  const user = getUser();
   return (
     <header className="flex justify-between items-center py-4 px-7 border-b">
       <Link href="/">
@@ -46,6 +51,25 @@ export default function Header() {
           ))}
         </ul>
       </nav>
+
+      <div className="flex items-center gap-x-3">
+        {user ? (
+          <>
+            <Image
+              className="rounded-full ml-auto"
+              src={user.picture!}
+              alt="User Avatar"
+              width={35}
+              height={35}
+            />
+          </>
+        ) : (
+          "Not logged in"
+        )}
+        {isAuthenticated && (
+          <LogoutLink className="ml-auto my-3">Logout</LogoutLink>
+        )}
+      </div>
     </header>
   );
 }
