@@ -36,6 +36,10 @@ export const getPost = async (slug: string) => {
     where: {
       slug: slug,
     },
+    select: {
+      title: true,
+      content: true,
+    },
   });
 };
 

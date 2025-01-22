@@ -12,5 +12,10 @@ export async function createPost(formData: FormData) {
       content,
       slug: title.toLowerCase().replace(/ /g, "-"),
     },
+    select: {
+      content: true,
+      slug: true,
+      title: true,
+    },
   });
 }
