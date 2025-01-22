@@ -1,10 +1,14 @@
+import { createPost } from "@/actions/actions";
 import React from "react";
 
 export default async function Page() {
   return (
     <main className="text-center pt-16 pb-6 mx-4">
       <h1 className="text-4xl font-bold mb-5">Create Post</h1>
-      <form className="flex flex-col max-w-[400px] mx-auto gap-2 my-10">
+      <form
+        action={createPost}
+        className="flex flex-col max-w-[400px] mx-auto gap-2 my-10"
+      >
         <input
           type="text"
           name="title"
